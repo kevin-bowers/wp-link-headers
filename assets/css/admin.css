@@ -1,0 +1,368 @@
+/* WP Link Headers — Admin styles */
+
+/* =========================================================================
+   Wrap & header
+   ========================================================================= */
+.wplh-wrap {
+	max-width: 1100px;
+}
+
+.wplh-wrap > .description {
+	font-size: 14px;
+	margin: 8px 0 20px;
+	color: #666;
+}
+
+/* =========================================================================
+   Live preview box
+   ========================================================================= */
+.wplh-preview-box {
+	background: #1e1e2e;
+	border: 1px solid #3c3c5c;
+	border-radius: 6px;
+	padding: 14px 18px;
+	margin-bottom: 20px;
+	color: #cdd6f4;
+	font-size: 13px;
+}
+
+.wplh-preview-box strong {
+	display: block;
+	color: #89b4fa;
+	margin-bottom: 8px;
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: .05em;
+}
+
+.wplh-preview-box pre {
+	margin: 0;
+	font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+	font-size: 13px;
+	line-height: 1.6;
+	white-space: pre-wrap;
+	word-break: break-all;
+	color: #a6e3a1;
+}
+
+/* =========================================================================
+   Main table
+   ========================================================================= */
+.wplh-table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 0;
+	table-layout: auto;
+}
+
+.wplh-table thead th {
+	background: #f0f0f1;
+	padding: 10px 12px;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	color: #50575e;
+	white-space: nowrap;
+}
+
+.wplh-table tbody tr {
+	transition: background .15s;
+}
+
+.wplh-table tbody tr:hover {
+	background: #f9f9f9;
+}
+
+.wplh-row-disabled td {
+	opacity: .55;
+}
+
+.wplh-table td {
+	padding: 10px 12px;
+	vertical-align: middle;
+	border-top: 1px solid #ddd;
+}
+
+/* Column widths */
+.wplh-col-handle  { width: 30px; }
+.wplh-col-resource { min-width: 160px; }
+.wplh-col-url      { min-width: 200px; }
+.wplh-col-rel      { min-width: 160px; }
+.wplh-col-type     { width: 120px; }
+.wplh-col-title    { min-width: 160px; }
+.wplh-col-enabled  { width: 70px; text-align: center; }
+.wplh-col-actions  { width: 80px; }
+
+/* =========================================================================
+   Drag handle
+   ========================================================================= */
+.wplh-drag-handle {
+	cursor: grab;
+	color: #b5bcc2;
+	font-size: 18px;
+	display: block;
+	text-align: center;
+	user-select: none;
+}
+
+.wplh-drag-handle:hover {
+	color: #50575e;
+}
+
+.wplh-table tbody tr.ui-sortable-helper {
+	box-shadow: 0 4px 14px rgba(0,0,0,.15);
+	background: #fff;
+}
+
+.wplh-table tbody tr.wplh-sort-placeholder td {
+	background: #e8f0fe;
+	border: 2px dashed #4285f4;
+}
+
+/* =========================================================================
+   Badges
+   ========================================================================= */
+.wplh-badge {
+	display: inline-block;
+	font-size: 10px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: .05em;
+	padding: 2px 6px;
+	border-radius: 3px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.wplh-badge-page   { background: #e7f3ff; color: #0056b3; }
+.wplh-badge-post   { background: #e9f7ef; color: #1a7f37; }
+.wplh-badge-custom { background: #fef3e2; color: #a44000; }
+
+/* =========================================================================
+   Toggle switch
+   ========================================================================= */
+.wplh-toggle {
+	position: relative;
+	display: inline-block;
+	width: 42px;
+	height: 24px;
+}
+
+.wplh-toggle input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.wplh-toggle-slider {
+	position: absolute;
+	inset: 0;
+	background: #ccc;
+	border-radius: 24px;
+	cursor: pointer;
+	transition: .25s;
+}
+
+.wplh-toggle-slider::before {
+	content: "";
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	left: 3px;
+	bottom: 3px;
+	background: #fff;
+	border-radius: 50%;
+	transition: .25s;
+	box-shadow: 0 1px 3px rgba(0,0,0,.25);
+}
+
+.wplh-toggle input:checked + .wplh-toggle-slider {
+	background: #2271b1;
+}
+
+.wplh-toggle input:checked + .wplh-toggle-slider::before {
+	transform: translateX(18px);
+}
+
+/* =========================================================================
+   rel= select + custom input
+   ========================================================================= */
+.wplh-rel-select {
+	max-width: 140px;
+}
+
+.wplh-rel-custom-input {
+	margin-top: 4px;
+	display: block;
+	max-width: 140px;
+}
+
+/* =========================================================================
+   URL display for page/post entries
+   ========================================================================= */
+.wplh-url-resolved {
+	word-break: break-all;
+	font-size: 12px;
+}
+
+/* =========================================================================
+   Remove button
+   ========================================================================= */
+.wplh-remove-btn {
+	color: #d63638 !important;
+	font-size: 12px;
+}
+
+.wplh-remove-btn:hover {
+	color: #8c1e1e !important;
+}
+
+/* =========================================================================
+   Empty notice
+   ========================================================================= */
+.wplh-empty-notice {
+	margin: 0;
+	padding: 24px;
+	text-align: center;
+	color: #666;
+	background: #f9f9f9;
+	border: 1px solid #ddd;
+	border-top: none;
+}
+
+/* =========================================================================
+   Add-entry panel
+   ========================================================================= */
+.wplh-add-panel {
+	margin: 20px 0;
+}
+
+.wplh-add-panel .postbox-header .hndle {
+	padding-left: 12px;
+}
+
+.wplh-add-tabs {
+	display: flex;
+	gap: 4px;
+	margin-bottom: 16px;
+}
+
+.wplh-tab-btn {
+	padding: 7px 14px;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	background: #fff;
+	cursor: pointer;
+	font-size: 13px;
+	color: #50575e;
+	transition: background .15s, border-color .15s;
+}
+
+.wplh-tab-btn:hover {
+	border-color: #2271b1;
+	color: #2271b1;
+}
+
+.wplh-tab-btn.active {
+	background: #2271b1;
+	border-color: #2271b1;
+	color: #fff;
+}
+
+.wplh-tab-content {
+	display: none;
+}
+
+.wplh-tab-content.active {
+	display: block;
+}
+
+/* =========================================================================
+   Search UI
+   ========================================================================= */
+.wplh-search-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.wplh-search-row label {
+	white-space: nowrap;
+	font-weight: 600;
+	font-size: 13px;
+}
+
+.wplh-spinner {
+	float: none;
+	margin: 0;
+	visibility: hidden;
+}
+
+.wplh-spinner.is-active {
+	visibility: visible;
+}
+
+.wplh-results-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	max-height: 260px;
+	overflow-y: auto;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background: #fff;
+}
+
+.wplh-results-list:empty {
+	display: none;
+}
+
+.wplh-results-list li {
+	padding: 0;
+}
+
+.wplh-result-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 9px 12px;
+	cursor: pointer;
+	border-bottom: 1px solid #f0f0f0;
+	transition: background .1s;
+	width: 100%;
+	background: none;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	text-align: left;
+	font-size: 13px;
+	color: #1d2327;
+}
+
+.wplh-result-item:last-child {
+	border-bottom: none;
+}
+
+.wplh-result-item:hover,
+.wplh-result-item:focus {
+	background: #e8f0fe;
+	outline: none;
+}
+
+.wplh-result-item .wplh-result-url {
+	font-size: 11px;
+	color: #888;
+	margin-left: auto;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 220px;
+}
+
+.wplh-no-results {
+	padding: 12px;
+	color: #888;
+	font-style: italic;
+}
