@@ -59,3 +59,6 @@ register_activation_hook( __FILE__, function ( $network_wide ): void {
 	require_once WP_LINK_HEADERS_DIR . 'includes/class-link-headers-installer.php';
 	WP_Link_Headers_Installer::activate( (bool) $network_wide );
 } );
+
+// Note: the plugin intentionally keeps its data on deactivation (the WordPress
+// convention). All stored data is removed on deletion via uninstall.php.

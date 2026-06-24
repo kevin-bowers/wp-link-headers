@@ -123,22 +123,47 @@ class WP_Link_Headers_Output {
 	 */
 	public function build_header_value( array $entry ): string {
 		$url = esc_url_raw( $entry['url'] ?? '' );
-		$rel = sanitize_text_field( $entry['rel'] ?? 'canonical' );
+		$rel = $this->sanitize_param( $entry['rel'] ?? 'canonical' );
 
 		if ( ! $url || ! $rel ) {
 			return '';
 		}
 
-		$parts = [ '<' . $url . '>', 'rel="' . esc_attr( $rel ) . '"' ];
+		$parts = [ '<' . $url . '>', 'rel="' . $rel . '"' ];
 
-		if ( ! empty( $entry['link_type'] ) ) {
-			$parts[] = 'type="' . esc_attr( sanitize_text_field( $entry['link_type'] ) ) . '"';
+		$type = $this->sanitize_param( $entry['link_type'] ?? '' );
+		if ( '' !== $type ) {
+			$parts[] = 'type="' . $type . '"';
 		}
 
-		if ( ! empty( $entry['link_title'] ) ) {
-			$parts[] = 'title="' . esc_attr( sanitize_text_field( $entry['link_title'] ) ) . '"';
+		$title = $this->sanitize_param( $entry['link_title'] ?? '' );
+		if ( '' !== $title ) {
+			$parts[] = 'title="' . $title . '"';
 		}
 
 		return implode( '; ', $parts );
+	}
+
+	/**
+	 * Sanitize a value for inclusion in a quoted Link-header parameter.
+	 *
+	 * Strips CR/LF and other control characters (which could split the response
+	 * into multiple headers) and removes the double-quote and backslash
+	 * characters that would otherwise break out of an RFC 8288 quoted-string.
+	 *
+	 * @param mixed $value
+	 *
+	 * @return string
+	 */
+	private function sanitize_param( $value ): string {
+		$value = (string) $value;
+
+		// Collapse any control characters (CR, LF, tab, NUL, vertical tab) to a space.
+		$value = preg_replace( '/[\x00-\x1F\x7F]+/', ' ', $value );
+
+		// Remove characters that could escape the quoted-string.
+		$value = str_replace( [ '"', '\\' ], '', (string) $value );
+
+		return trim( $value );
 	}
 }

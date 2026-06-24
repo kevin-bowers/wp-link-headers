@@ -89,6 +89,10 @@ No. Link headers are added at the HTTP layer before any HTML is rendered.
 
 Yes. Every `WP_REST_Response` will carry the enabled Link headers.
 
+= What happens to my settings when I deactivate or delete the plugin? =
+
+Deactivating the plugin leaves your settings intact, so you can safely deactivate and reactivate (for example, while troubleshooting) without losing your configuration. **Deleting** the plugin removes all of its data (the `wp_link_headers_entries` option). On a multisite network, deletion cleans up every site.
+
 == Changelog ==
 
 = 1.0.0 =
@@ -96,6 +100,8 @@ Yes. Every `WP_REST_Response` will carry the enabled Link headers.
 * Seeds the home page, RSS feed, XML sitemap, and llms.txt on activation.
 * Multisite/network support, including auto-seeding of new sites.
 * WP-CLI command: `wp link-headers`.
+* Removes all stored data on uninstall (network-aware); deactivation preserves settings.
+* Hardening: RFC 8288 header-value sanitization, source allowlisting, stricter AJAX input validation.
 
 == Upgrade Notice ==
 

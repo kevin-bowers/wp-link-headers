@@ -13,6 +13,9 @@ class WP_Link_Headers_Admin {
 	private const NONCE_FIELD  = 'wp_link_headers_nonce';
 	private const CAP           = 'manage_options';
 
+	/** Allowed entry sources. */
+	private const VALID_SOURCES = [ 'page', 'post', 'custom' ];
+
 	/** Preset rel values shown in the dropdown. */
 	private const REL_PRESETS = [
 		'canonical'   => 'canonical',
@@ -431,6 +434,9 @@ class WP_Link_Headers_Admin {
 			}
 
 			$source = sanitize_text_field( $row['source'] ?? 'custom' );
+			if ( ! in_array( $source, self::VALID_SOURCES, true ) ) {
+				$source = 'custom';
+			}
 
 			// Resolve effective rel.
 			$rel_select = sanitize_text_field( $row['rel'] ?? 'canonical' );
@@ -531,9 +537,19 @@ class WP_Link_Headers_Admin {
 			wp_send_json_error( 'Forbidden', 403 );
 		}
 
-		$post_id = (int) ( $_POST['post_id'] ?? 0 );
-		$source  = sanitize_text_field( $_POST['source'] ?? 'post' );
-		$index   = sanitize_text_field( $_POST['index'] ?? '0' );
+		$post_id = absint( $_POST['post_id'] ?? 0 );
+
+		// This endpoint only creates page/post rows; constrain accordingly.
+		$source = sanitize_text_field( wp_unslash( $_POST['source'] ?? 'post' ) );
+		if ( ! in_array( $source, [ 'page', 'post' ], true ) ) {
+			$source = 'post';
+		}
+
+		// Index is normally the JS placeholder "__IDX__"; otherwise it must be numeric.
+		$index = sanitize_text_field( wp_unslash( $_POST['index'] ?? '0' ) );
+		if ( '__IDX__' !== $index && ! ctype_digit( $index ) ) {
+			$index = '0';
+		}
 
 		$post = get_post( $post_id );
 		if ( ! $post ) {
